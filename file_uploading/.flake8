@@ -1,0 +1,10 @@
+[flake8]
+ignore = 
+    E501
+exclude =
+    migrations,
+    __pycache__,
+    manage.py,
+    settings.py,
+per-file-ignores = 
+    */settings.py:E501
