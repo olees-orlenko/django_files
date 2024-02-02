@@ -1,0 +1,35 @@
+version: '3'
+
+volumes:
+  pg_data:
+
+services:
+  redis:
+    image: redis
+    ports:
+      - '6379:6379'
+  db:
+    image: postgres:13.10
+    env_file: .env
+    ports:
+      - '5432:5432'
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+  backend:
+    build: ./
+    env_file: .env
+    ports:
+      - '8000:8000'
+    volumes:
+      - ./file_uploading:/app/
+    depends_on:
+      - db
+  celery:
+    build: ./
+    env_file: .env
+    command: celery -A file_uploading.celery worker --beat -l INFO
+    volumes:
+      - ./file_uploading:/app/
+    depends_on:
+      - redis
+      - backend
