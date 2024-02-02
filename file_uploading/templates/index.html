@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список файлов</title>
+</head>
+<body>
+    <h1>Список файлов</h1>
+    {% if files %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Загружен</th>
+                    <th>Обработан</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for file in files %}
+                <tr>
+                    <td>{{ file.uploaded_at }}</td>
+                    <td>{{ file.processed }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Нет загруженных файлов</p>
+    {% endif %}
+</body>
+</html>
