@@ -7,7 +7,7 @@ from .views import FileAPIView, FileUploadedAPIView
 app_name = "api"
 
 urlpatterns = [
-    path("files/", FileUploadedAPIView.as_view(template_name="index.html")),
+    path("files/", FileUploadedAPIView.as_view()),
     path("upload/", FileAPIView.as_view()),
 ]
 
